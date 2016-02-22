@@ -12,44 +12,44 @@ UICollectionView重排功能的DEMO
 UICollectionView的重排是在iOS9之后进行提供的一个小功能,只有在iOS9之后才可以支持。
 
 ## 一.我们首先需要为UICollectionView添加一个长按手势
-        - (void)setUpMovement{
-        UILongPressGestureRecognizer *longPressGestureRecognizer =             [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];
-        [self.collectionView addGestureRecognizer:longPressGestureRecognizer];
-        }
+    - (void)setUpMovement{
+    UILongPressGestureRecognizer *longPressGestureRecognizer =             [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];
+    [self.collectionView addGestureRecognizer:longPressGestureRecognizer];
+    }
 
 
 ## 二.在长按手势的触发方法中执行方法
-- (void)longPressAction:(UIGestureRecognizer *)gesture{
-        NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:[gesture locationInView:self.collectionView]];
-        switch (gesture.state) {
-            case UIGestureRecognizerStateBegan:{
-//当长按手势刚开始时，开始执行移动操作
-                [self.collectionView beginInteractiveMovementForItemAtIndexPath:indexPath];
-                break;
-            }
-            case UIGestureRecognizerStateChanged:{
-//当长按手势改变位置时，执行移动的操作 
-//下面两个状态，方法和意思相同
-                [self.collectionView updateInteractiveMovementTargetPosition:[gesture locationInView:self.collectionView]];
-                break;
-            }
-            case UIGestureRecognizerStateEnded:{
-                [self.collectionView endInteractiveMovement];
-                break;
-                }
-            default:
-                [self.collectionView cancelInteractiveMovement];
-                break;
-        }
-}
+    - (void)longPressAction:(UIGestureRecognizer *)gesture{
+            NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:[gesture locationInView:self.collectionView]];
+            switch (gesture.state) {
+                case UIGestureRecognizerStateBegan:{
+    //当长按手势刚开始时，开始执行移动操作
+                    [self.collectionView beginInteractiveMovementForItemAtIndexPath:indexPath];
+                    break;
+                }
+                case UIGestureRecognizerStateChanged:{
+    //当长按手势改变位置时，执行移动的操作 
+    //下面两个状态，方法和意思相同
+                    [self.collectionView updateInteractiveMovementTargetPosition:[gesture locationInView:self.collectionView]];
+                    break;
+                }
+                case UIGestureRecognizerStateEnded:{
+                    [self.collectionView endInteractiveMovement];
+                    break;
+                    }
+                default:
+                    [self.collectionView cancelInteractiveMovement];
+                    break;
+            }
+    }
 
 ## 三.还需要重写UICollectionViewDataSource的代理方法
 
-- (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
-        NSString *temp = [_dataArray objectAtIndex:sourceIndexPath.row];
-        [_dataArray removeObjectAtIndex:sourceIndexPath.row];
-        [_dataArray insertObject:temp atIndex:destinationIndexPath.row];
-}
+    - (void)collectionView:(UICollectionView *)collectionView moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+            NSString *temp = [_dataArray objectAtIndex:sourceIndexPath.row];
+            [_dataArray removeObjectAtIndex:sourceIndexPath.row];
+            [_dataArray insertObject:temp atIndex:destinationIndexPath.row];
+    }
 
 # 效果图
 
