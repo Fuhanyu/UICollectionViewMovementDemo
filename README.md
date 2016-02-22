@@ -12,10 +12,10 @@ UICollectionView重排功能的DEMO
 UICollectionView的重排是在iOS9之后进行提供的一个小功能,只有在iOS9之后才可以支持。
 
 ## 一.我们首先需要为UICollectionView添加一个长按手势
-- (void)setUpMovement{
-UILongPressGestureRecognizer *longPressGestureRecognizer =             [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];
-[self.collectionView addGestureRecognizer:longPressGestureRecognizer];
-}
+        - (void)setUpMovement{
+        UILongPressGestureRecognizer *longPressGestureRecognizer =             [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];
+        [self.collectionView addGestureRecognizer:longPressGestureRecognizer];
+        }
 
 
 ## 二.在长按手势的触发方法中执行方法
